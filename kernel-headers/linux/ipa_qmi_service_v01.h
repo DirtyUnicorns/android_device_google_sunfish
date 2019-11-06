@@ -35,6 +35,7 @@
 #define QMI_IPA_MAX_PIPES_V01 20
 #define QMI_IPA_MAX_PER_CLIENTS_V01 64
 #define IPA_QMI_SUPPORTS_STATS
+#define IPA_QMI_SUPPORT_MHI_DEFAULT
 #define IPA_INT_MAX ((int) (~0U >> 1))
 #define IPA_INT_MIN (- IPA_INT_MAX - 1)
 enum ipa_qmi_result_type_v01 {
@@ -781,8 +782,10 @@ struct ipa_add_offload_connection_req_msg_v01 {
   struct ipa_filter_spec_ex2_type_v01 filter_spec_ex2_list[QMI_IPA_MAX_FILTERS_V01];
   uint8_t embedded_call_mux_id_valid;
   uint32_t embedded_call_mux_id;
+  uint8_t default_mhi_path_valid;
+  uint8_t default_mhi_path;
 };
-#define IPA_ADD_OFFLOAD_CONNECTION_REQ_MSG_V01_MAX_MSG_LEN 11357
+#define IPA_ADD_OFFLOAD_CONNECTION_REQ_MSG_V01_MAX_MSG_LEN 11361
 struct ipa_add_offload_connection_resp_msg_v01 {
   struct ipa_qmi_response_type_v01 resp;
   uint8_t filter_handle_list_valid;
@@ -794,8 +797,10 @@ struct ipa_remove_offload_connection_req_msg_v01 {
   uint8_t filter_handle_list_valid;
   uint32_t filter_handle_list_len;
   struct ipa_filter_rule_identifier_to_handle_map_v01 filter_handle_list[QMI_IPA_MAX_FILTERS_V01];
+  uint8_t clean_all_rules_valid;
+  uint8_t clean_all_rules;
 };
-#define IPA_REMOVE_OFFLOAD_CONNECTION_REQ_MSG_V01_MAX_MSG_LEN 516
+#define IPA_REMOVE_OFFLOAD_CONNECTION_REQ_MSG_V01_MAX_MSG_LEN 520
 struct ipa_remove_offload_connection_resp_msg_v01 {
   uint8_t resp_valid;
   struct ipa_qmi_response_type_v01 resp;
