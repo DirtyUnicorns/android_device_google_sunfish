@@ -72,6 +72,8 @@ struct cam_cmd_get_ois_data {
 struct cam_ois_shift {
   int16_t ois_shift_x;
   int16_t ois_shift_y;
+  int16_t af_shift_z;
+  int16_t af_ois_xtalk_z;
   int64_t time_readout;
 } __attribute__((packed));
 struct cam_ois_opcode {
@@ -189,6 +191,12 @@ struct cam_sensor_streamon_dev {
   uint32_t handle_type;
   uint32_t reserved;
   uint64_t info_handle;
+} __attribute__((packed));
+struct cam_cmd_get_sensor_data {
+  uint32_t reg_addr;
+  uint32_t reg_data;
+  uint64_t query_size_handle;
+  uint64_t query_data_handle;
 } __attribute__((packed));
 struct cam_flash_init {
   uint8_t flash_type;

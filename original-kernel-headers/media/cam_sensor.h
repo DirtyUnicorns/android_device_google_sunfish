@@ -122,11 +122,15 @@ struct cam_cmd_get_ois_data {
  *
  * @ois_shift_x         :    shift in x dim
  * @ois_shift_y         :    shift in y dim
+ * @af_shift_z          :    shift in z dim
+ * @af_ois_xtalk_z      :    shift in z dim with ois
  * @time_readout        :    time that the shift is read out
  */
 struct cam_ois_shift {
 	int16_t             ois_shift_x;
 	int16_t             ois_shift_y;
+	int16_t             af_shift_z;
+	int16_t             af_ois_xtalk_z;
 	int64_t             time_readout;
 } __attribute__((packed));
 
@@ -417,6 +421,21 @@ struct cam_sensor_streamon_dev {
 	uint32_t    handle_type;
 	uint32_t    reserved;
 	uint64_t    info_handle;
+} __attribute__((packed));
+
+/**
+ * struct cam_cmd_get_sensor_data - Contains Sensor data read cmd
+ *
+ * @reg_addr            :    register addr to read data from
+ * @reg_data            :    number of bytes to read
+ * @query_size_handle   :    handle to user space query_size address
+ * @query_data_handle   :    handle to user space query_data address
+ */
+struct cam_cmd_get_sensor_data {
+	uint32_t           reg_addr;
+	uint32_t           reg_data;
+	uint64_t           query_size_handle;
+	uint64_t           query_data_handle;
 } __attribute__((packed));
 
 /**
