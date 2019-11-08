@@ -72,8 +72,7 @@ struct cam_cmd_get_ois_data {
 struct cam_ois_shift {
   int16_t ois_shift_x;
   int16_t ois_shift_y;
-  int16_t af_shift_z;
-  int16_t af_ois_xtalk_z;
+  int16_t af_lop1;
   int64_t time_readout;
 } __attribute__((packed));
 struct cam_ois_opcode {
