@@ -34,7 +34,8 @@ PRODUCT_SOONG_NAMESPACES += \
     vendor/qcom/sm8150/proprietary/commonsys/telephony-apps/DataStatusNotification \
     vendor/qcom/sm8150/proprietary/gps \
     vendor/qcom/sm8150/codeaurora/location \
-    vendor/google/interfaces
+    vendor/google/interfaces \
+    vendor/codeaurora/telephony/ims
 
 # Include sensors soong namespace
 PRODUCT_SOONG_NAMESPACES += \
@@ -89,6 +90,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     messaging \
     netutils-wrapper-1.0
+
+# IMS/Telephony
+PRODUCT_PACKAGES += \
+    ims-ext-common \
+    ims_ext_common.xml \
+    telephony-ext
 
 TARGET_PRODUCT_PROP := $(LOCAL_PATH)/product.prop
 
@@ -935,6 +942,12 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota_retrofit.mk)
 # Native video calling
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.dbg.vt_avail_ovr=1
+
+# IMS/Telephony
+PRODUCT_PACKAGES += \
+    ims-ext-common \
+    ims_ext_common.xml \
+    telephony-ext
 
 # RCS
 PRODUCT_PACKAGES += \
