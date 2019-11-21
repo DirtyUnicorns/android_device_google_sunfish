@@ -31,7 +31,8 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/qcom/sm7150/display \
     vendor/google/camera \
     vendor/qcom/sm7150 \
-    vendor/google/interfaces
+    vendor/google/interfaces \
+    vendor/codeaurora/telephony/ims
 
 # Single vendor RIL/Telephony/data with SM8150
 DEVICE_USES_SM8150_QCRIL_TELEPHONY := true
@@ -77,6 +78,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     messaging \
     netutils-wrapper-1.0
+
+# IMS/Telephony
+PRODUCT_PACKAGES += \
+    ims-ext-common \
+    ims_ext_common.xml \
+    telephony-ext
 
 TARGET_PRODUCT_PROP := $(LOCAL_PATH)/product.prop
 
