@@ -157,6 +157,8 @@ struct ipa_indication_reg_req_msg_v01 {
   uint8_t ipa_mhi_ready_ind;
   uint8_t endpoint_desc_ind_valid;
   uint8_t endpoint_desc_ind;
+  uint8_t bw_change_ind_valid;
+  uint8_t bw_change_ind;
 };
 struct ipa_indication_reg_resp_msg_v01 {
   struct ipa_qmi_response_type_v01 resp;
@@ -806,6 +808,13 @@ struct ipa_remove_offload_connection_resp_msg_v01 {
   struct ipa_qmi_response_type_v01 resp;
 };
 #define IPA_REMOVE_OFFLOAD_CONNECTION_RESP_MSG_V01_MAX_MSG_LEN 7
+struct ipa_bw_change_ind_msg_v01 {
+  uint8_t peak_bw_ul_valid;
+  uint32_t peak_bw_ul;
+  uint8_t peak_bw_dl_valid;
+  uint32_t peak_bw_dl;
+};
+#define IPA_BW_CHANGE_IND_MSG_V01_MAX_MSG_LEN 14
 #define QMI_IPA_INDICATION_REGISTER_REQ_V01 0x0020
 #define QMI_IPA_INDICATION_REGISTER_RESP_V01 0x0020
 #define QMI_IPA_INIT_MODEM_DRIVER_REQ_V01 0x0021
@@ -859,9 +868,10 @@ struct ipa_remove_offload_connection_resp_msg_v01 {
 #define QMI_IPA_ADD_OFFLOAD_CONNECTION_RESP_V01 0x0041
 #define QMI_IPA_REMOVE_OFFLOAD_CONNECTION_REQ_V01 0x0042
 #define QMI_IPA_REMOVE_OFFLOAD_CONNECTION_RESP_V01 0x0042
+#define QMI_IPA_BW_CHANGE_INDICATION_V01 0x0044
 #define QMI_IPA_INIT_MODEM_DRIVER_REQ_MAX_MSG_LEN_V01 162
 #define QMI_IPA_INIT_MODEM_DRIVER_RESP_MAX_MSG_LEN_V01 25
-#define QMI_IPA_INDICATION_REGISTER_REQ_MAX_MSG_LEN_V01 16
+#define QMI_IPA_INDICATION_REGISTER_REQ_MAX_MSG_LEN_V01 20
 #define QMI_IPA_INDICATION_REGISTER_RESP_MAX_MSG_LEN_V01 7
 #define QMI_IPA_INSTALL_FILTER_RULE_REQ_MAX_MSG_LEN_V01 33705
 #define QMI_IPA_INSTALL_FILTER_RULE_RESP_MAX_MSG_LEN_V01 783

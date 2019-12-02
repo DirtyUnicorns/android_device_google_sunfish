@@ -210,6 +210,7 @@ struct cam_mem_cache_ops_cmd {
 #define CAM_REQ_MGR_ERROR_TYPE_REQUEST 1
 #define CAM_REQ_MGR_ERROR_TYPE_BUFFER 2
 #define CAM_REQ_MGR_ERROR_TYPE_RECOVERY 3
+#define CAM_REQ_MGR_ERROR_TYPE_FULL_RECOVERY 4
 struct cam_req_mgr_error_msg {
   uint32_t error_type;
   uint32_t request_id;
