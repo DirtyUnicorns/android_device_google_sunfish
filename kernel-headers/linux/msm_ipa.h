@@ -150,6 +150,9 @@
 #define IPA_FLT_L2TP_INNER_IP_TYPE (1ul << 25)
 #define IPA_FLT_L2TP_INNER_IPV4_DST_ADDR (1ul << 26)
 #define IPA_FLT_IS_PURE_ACK (1ul << 27)
+#define IPA_FLT_VLAN_ID (1ul << 28)
+#define IPA_FLT_MAC_SRC_ADDR_802_1Q (1ul << 29)
+#define IPA_FLT_MAC_DST_ADDR_802_1Q (1ul << 30)
 #define IPA_MAX_PDN_NUM 5
 enum ipa_client_type {
   IPA_CLIENT_HSIC1_PROD = 0,
@@ -472,6 +475,7 @@ struct ipa_rule_attrib {
       uint32_t dst_addr_mask[4];
     } v6;
   } u;
+  uint16_t vlan_id;
 };
 #define IPA_IPFLTR_NUM_MEQ_32_EQNS 2
 #define IPA_IPFLTR_NUM_IHL_MEQ_32_EQNS 2
@@ -573,9 +577,10 @@ enum ipa_hdr_proc_type {
   IPA_HDR_PROC_802_3_TO_ETHII,
   IPA_HDR_PROC_802_3_TO_802_3,
   IPA_HDR_PROC_L2TP_HEADER_ADD,
-  IPA_HDR_PROC_L2TP_HEADER_REMOVE
+  IPA_HDR_PROC_L2TP_HEADER_REMOVE,
+  IPA_HDR_PROC_ETHII_TO_ETHII_EX
 };
-#define IPA_HDR_PROC_MAX (IPA_HDR_PROC_L2TP_HEADER_REMOVE + 1)
+#define IPA_HDR_PROC_MAX (IPA_HDR_PROC_ETHII_TO_ETHII_EX + 1)
 struct ipa_rt_rule {
   enum ipa_client_type dst;
   uint32_t hdr_hdl;
@@ -635,6 +640,11 @@ struct ipa_l2tp_hdr_proc_ctx_params {
   uint8_t is_dst_pipe_valid;
   enum ipa_client_type dst_pipe;
 };
+struct ipa_eth_II_to_eth_II_ex_procparams {
+  uint32_t input_ethhdr_negative_offset : 8;
+  uint32_t output_ethhdr_negative_offset : 8;
+  uint32_t reserved : 16;
+};
 #define L2TP_USER_SPACE_SPECIFY_DST_PIPE
 struct ipa_hdr_proc_ctx_add {
   enum ipa_hdr_proc_type type;
@@ -642,6 +652,7 @@ struct ipa_hdr_proc_ctx_add {
   uint32_t proc_ctx_hdl;
   int status;
   struct ipa_l2tp_hdr_proc_ctx_params l2tp_params;
+  struct ipa_eth_II_to_eth_II_ex_procparams generic_params;
 };
 #define IPA_L2TP_HDR_PROC_SUPPORT
 struct ipa_ioc_add_hdr_proc_ctx {
