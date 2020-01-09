@@ -250,6 +250,9 @@ struct snd_dec_aptx {
   __u32 uap;
   __u32 nap;
 };
+struct snd_dec_dsd {
+  __u32 blk_size;
+};
 struct snd_dec_pcm {
   __u32 num_channels;
   __u8 ch_map[MAX_PCM_DECODE_CHANNELS];
@@ -272,6 +275,7 @@ union snd_codec_options {
   struct snd_dec_thd truehd;
   struct snd_dec_pcm pcm_dec;
   struct snd_dec_amrwb_plus amrwbplus;
+  struct snd_dec_dsd dsd_dec;
 };
 struct snd_codec_desc {
   __u32 max_ch;
