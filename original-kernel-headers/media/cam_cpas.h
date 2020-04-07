@@ -6,6 +6,8 @@
 #define CAM_FAMILY_CAMERA_SS     1
 #define CAM_FAMILY_CPAS_SS       2
 
+#ifdef CONFIG_BOARD_SUNFISH
+
 /* AXI BW Voting Version */
 #define CAM_AXI_BW_VOTING_V2                2
 
@@ -25,9 +27,9 @@
 #define CAM_AXI_PATH_DATA_IFE_RDI3      (CAM_AXI_PATH_DATA_IFE_START_OFFSET + 7)
 #define CAM_AXI_PATH_DATA_IFE_PDAF      (CAM_AXI_PATH_DATA_IFE_START_OFFSET + 8)
 #define CAM_AXI_PATH_DATA_IFE_PIXEL_RAW \
-	(CAM_AXI_PATH_DATA_IFE_START_OFFSET + 9)
+       (CAM_AXI_PATH_DATA_IFE_START_OFFSET + 9)
 #define CAM_AXI_PATH_DATA_IFE_MAX_OFFSET \
-	(CAM_AXI_PATH_DATA_IFE_START_OFFSET + 31)
+       (CAM_AXI_PATH_DATA_IFE_START_OFFSET + 31)
 
 #define CAM_AXI_PATH_DATA_IPE_START_OFFSET 32
 #define CAM_AXI_PATH_DATA_IPE_RD_IN     (CAM_AXI_PATH_DATA_IPE_START_OFFSET + 0)
@@ -36,25 +38,9 @@
 #define CAM_AXI_PATH_DATA_IPE_WR_DISP   (CAM_AXI_PATH_DATA_IPE_START_OFFSET + 3)
 #define CAM_AXI_PATH_DATA_IPE_WR_REF    (CAM_AXI_PATH_DATA_IPE_START_OFFSET + 4)
 #define CAM_AXI_PATH_DATA_IPE_MAX_OFFSET \
-	(CAM_AXI_PATH_DATA_IPE_START_OFFSET + 31)
+       (CAM_AXI_PATH_DATA_IPE_START_OFFSET + 31)
 
 #define CAM_AXI_PATH_DATA_ALL              256
-
-/**
- * struct cam_cpas_query_cap - CPAS query device capability payload
- *
- * @camera_family     : Camera family type
- * @reserved          : Reserved field for alignment
- * @camera_version    : Camera platform version
- * @cpas_version      : Camera CPAS version within camera platform
- *
- */
-struct cam_cpas_query_cap {
-	uint32_t                 camera_family;
-	uint32_t                 reserved;
-	struct cam_hw_version    camera_version;
-	struct cam_hw_version    cpas_version;
-};
 
 /**
  * struct cam_axi_per_path_bw_vote - Per path bandwidth vote information
@@ -70,15 +56,33 @@ struct cam_cpas_query_cap {
  * @ddr_ib_bw                DDR IB bw for this path
  */
 struct cam_axi_per_path_bw_vote {
-	uint32_t                      usage_data;
-	uint32_t                      transac_type;
-	uint32_t                      path_data_type;
-	uint32_t                      reserved;
-	uint64_t                      camnoc_bw;
-	uint64_t                      mnoc_ab_bw;
-	uint64_t                      mnoc_ib_bw;
-	uint64_t                      ddr_ab_bw;
-	uint64_t                      ddr_ib_bw;
+       uint32_t                      usage_data;
+       uint32_t                      transac_type;
+       uint32_t                      path_data_type;
+       uint32_t                      reserved;
+       uint64_t                      camnoc_bw;
+       uint64_t                      mnoc_ab_bw;
+       uint64_t                      mnoc_ib_bw;
+       uint64_t                      ddr_ab_bw;
+       uint64_t                      ddr_ib_bw;
+};
+
+#endif /* CONFIG_BOARD_SUNFISH */
+
+/**
+ * struct cam_cpas_query_cap - CPAS query device capability payload
+ *
+ * @camera_family     : Camera family type
+ * @reserved          : Reserved field for alignment
+ * @camera_version    : Camera platform version
+ * @cpas_version      : Camera CPAS version within camera platform
+ *
+ */
+struct cam_cpas_query_cap {
+	uint32_t                 camera_family;
+	uint32_t                 reserved;
+	struct cam_hw_version    camera_version;
+	struct cam_hw_version    cpas_version;
 };
 
 #endif /* __UAPI_CAM_CPAS_H__ */

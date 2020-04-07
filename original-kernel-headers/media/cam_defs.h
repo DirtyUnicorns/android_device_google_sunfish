@@ -21,7 +21,6 @@
 #define CAM_COMMON_OPCODE_BASE_v2           0x150
 #define CAM_ACQUIRE_HW                      (CAM_COMMON_OPCODE_BASE_v2 + 0x1)
 #define CAM_RELEASE_HW                      (CAM_COMMON_OPCODE_BASE_v2 + 0x2)
-#define CAM_DUMP_REQ                        (CAM_COMMON_OPCODE_BASE_v2 + 0x3)
 
 #define CAM_EXT_OPCODE_BASE                     0x200
 #define CAM_CONFIG_DEV_EXTERNAL                 (CAM_EXT_OPCODE_BASE + 0x1)
@@ -50,6 +49,37 @@
 
 /* UBWC API Version */
 #define CAM_UBWC_CFG_VERSION_1              1
+
+#ifdef CONFIG_BOARD_SUNFISH
+
+#define CAM_DUMP_REQ                        (CAM_COMMON_OPCODE_BASE_v2 + 0x3)
+
+/**
+ * struct cam_dump_req_cmd -
+ *        Dump the information of issue req id
+ *
+ * @issue_req_id   : Issue Request Id
+ * @session_handle : Session Handle
+ * @link_hdl       : link handle
+ * @dev_handle     : Device Handle
+ * @error_type     : Error Type
+ * @buf_handle     : Buffer Handle
+ * @offset         : offset for the buffer
+ * @reserved       : Reserved
+ */
+struct cam_dump_req_cmd {
+       int64_t        issue_req_id;
+       int32_t        session_handle;
+       int32_t        link_hdl;
+       int32_t        dev_handle;
+       int32_t        error_type;
+       uint32_t       buf_handle;
+       int32_t        offset;
+       uint32_t       reserved;
+};
+
+#endif /*CONFIG_BOARD_SUNFISH*/
+
 
 /**
  * enum flush_type_t - Identifies the various flush types
@@ -625,30 +655,6 @@ struct cam_cmd_mem_regions {
 	uint32_t version;
 	uint32_t num_regions;
 	struct cam_cmd_mem_region_info map_info_array[1];
-};
-
-/**
- * struct cam_dump_req_cmd -
- *        Dump the information of issue req id
- *
- * @issue_req_id   : Issue Request Id
- * @session_handle : Session Handle
- * @link_hdl       : link handle
- * @dev_handle     : Device Handle
- * @error_type     : Error Type
- * @buf_handle     : Buffer Handle
- * @offset         : offset for the buffer
- * @reserved       : Reserved
- */
-struct cam_dump_req_cmd {
-	int64_t        issue_req_id;
-	int32_t        session_handle;
-	int32_t        link_hdl;
-	int32_t        dev_handle;
-	int32_t        error_type;
-	uint32_t       buf_handle;
-	int32_t        offset;
-	uint32_t       reserved;
 };
 
 
