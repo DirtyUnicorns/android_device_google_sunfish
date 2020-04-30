@@ -404,7 +404,13 @@ enum ipa_peripheral_event {
 };
 #define WIGIG_FST_SWITCH (WIGIG_CLIENT_CONNECT + 1)
 #define WIGIG_EVENT_MAX (WIGIG_FST_SWITCH + 1)
-#define IPA_EVENT_MAX_NUM (WIGIG_EVENT_MAX)
+enum ipa_sockv5_event {
+  IPA_SOCKV5_ADD = WIGIG_EVENT_MAX,
+  IPA_SOCKV5_DEL,
+  IPA_SOCKV5_EVENT_MAX
+#define IPA_SOCKV5_EVENT_MAX IPA_SOCKV5_EVENT_MAX
+};
+#define IPA_EVENT_MAX_NUM (IPA_SOCKV5_EVENT_MAX)
 #define IPA_EVENT_MAX ((int) IPA_EVENT_MAX_NUM)
 enum ipa_rm_resource_name {
   IPA_RM_RESOURCE_Q6_PROD = 0,
@@ -1105,6 +1111,21 @@ struct ipa_wan_msg {
   enum ipa_ip_type ip;
   uint32_t ipv4_addr_gw;
   uint32_t ipv6_addr_gw[IPA_WAN_MSG_IPv6_ADDR_GW_LEN];
+};
+struct ipacm_socksv5_info {
+  enum ipa_ip_type ip_type;
+  uint32_t ipv4_src;
+  uint32_t ipv4_dst;
+  uint32_t ipv6_src[4];
+  uint32_t ipv6_dst[4];
+  uint16_t src_port;
+  uint16_t dst_port;
+  uint16_t index;
+};
+struct ipa_socksv5_msg {
+  struct ipacm_socksv5_info ul_in;
+  struct ipacm_socksv5_info dl_in;
+  uint16_t handle;
 };
 struct ipa_ioc_rm_dependency {
   enum ipa_rm_resource_name resource_name;
