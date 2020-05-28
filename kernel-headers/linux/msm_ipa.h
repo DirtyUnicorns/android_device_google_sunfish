@@ -161,7 +161,8 @@
 #define IPA_FLT_EXT_L2TP_UDP_INNER_ETHER_TYPE (1ul << 1)
 #define IPA_FLT_EXT_MTU (1ul << 2)
 #define IPA_FLT_EXT_L2TP_UDP_INNER_NEXT_HDR (1ul << 3)
-#define IPA_MAX_PDN_NUM 5
+#define IPA_FLT_EXT_NEXT_HDR (1ul << 4)
+#define IPA_MAX_PDN_NUM 7
 enum ipa_client_type {
   IPA_CLIENT_HSIC1_PROD = 0,
   IPA_CLIENT_HSIC1_CONS = 1,
@@ -258,8 +259,11 @@ enum ipa_client_type {
   IPA_CLIENT_MHI2_CONS = 105,
   IPA_CLIENT_Q6_CV2X_PROD = 106,
   IPA_CLIENT_Q6_CV2X_CONS = 107,
+  IPA_CLIENT_MHI_LOW_LAT_PROD = 108,
+  IPA_CLIENT_MHI_LOW_LAT_CONS = 109,
+  IPA_CLIENT_MHI_QDSS_CONS = 111,
 };
-#define IPA_CLIENT_MAX (IPA_CLIENT_Q6_CV2X_CONS + 1)
+#define IPA_CLIENT_MAX (IPA_CLIENT_MHI_QDSS_CONS + 1)
 #define IPA_CLIENT_WLAN2_PROD IPA_CLIENT_A5_WLAN_AMPDU_PROD
 #define IPA_CLIENT_Q6_DL_NLO_DATA_PROD IPA_CLIENT_Q6_DL_NLO_DATA_PROD
 #define IPA_CLIENT_Q6_UL_NLO_ACK_CONS IPA_CLIENT_Q6_UL_NLO_ACK_CONS
@@ -279,6 +283,7 @@ enum ipa_client_type {
 #define IPA_CLIENT_MHI_PRIME_RMNET_PROD IPA_CLIENT_MHI_PRIME_RMNET_PROD
 #define IPA_CLIENT_MHI_PRIME_RMNET_CONS IPA_CLIENT_MHI_PRIME_RMNET_CONS
 #define IPA_CLIENT_MHI_PRIME_DPL_PROD IPA_CLIENT_MHI_PRIME_DPL_PROD
+#define IPA_CLIENT_MHI_QDSS_CONS IPA_CLIENT_MHI_QDSS_CONS
 #define IPA_CLIENT_IS_APPS_CONS(client) ((client) == IPA_CLIENT_APPS_LAN_CONS || (client) == IPA_CLIENT_APPS_WAN_CONS || (client) == IPA_CLIENT_APPS_WAN_COAL_CONS)
 #define IPA_CLIENT_IS_APPS_PROD(client) ((client) == IPA_CLIENT_APPS_LAN_PROD || (client) == IPA_CLIENT_APPS_WAN_PROD)
 #define IPA_CLIENT_IS_USB_CONS(client) ((client) == IPA_CLIENT_USB_CONS || (client) == IPA_CLIENT_USB2_CONS || (client) == IPA_CLIENT_USB3_CONS || (client) == IPA_CLIENT_USB_DPL_CONS || (client) == IPA_CLIENT_USB4_CONS)
@@ -293,7 +298,7 @@ enum ipa_client_type {
 #define IPA_CLIENT_IS_Q6_ZIP_PROD(client) ((client) == IPA_CLIENT_Q6_DECOMP_PROD || (client) == IPA_CLIENT_Q6_DECOMP2_PROD)
 #define IPA_CLIENT_IS_MEMCPY_DMA_CONS(client) ((client) == IPA_CLIENT_MEMCPY_DMA_SYNC_CONS || (client) == IPA_CLIENT_MEMCPY_DMA_ASYNC_CONS)
 #define IPA_CLIENT_IS_MEMCPY_DMA_PROD(client) ((client) == IPA_CLIENT_MEMCPY_DMA_SYNC_PROD || (client) == IPA_CLIENT_MEMCPY_DMA_ASYNC_PROD)
-#define IPA_CLIENT_IS_MHI(client) ((client) == IPA_CLIENT_MHI_CONS || (client) == IPA_CLIENT_MHI_PROD || (client) == IPA_CLIENT_MHI2_PROD || (client) == IPA_CLIENT_MHI2_CONS || (client) == IPA_CLIENT_MHI_DPL_CONS)
+#define IPA_CLIENT_IS_MHI(client) ((client) == IPA_CLIENT_MHI_CONS || (client) == IPA_CLIENT_MHI_PROD || (client) == IPA_CLIENT_MHI2_PROD || (client) == IPA_CLIENT_MHI2_CONS || (client) == IPA_CLIENT_MHI_LOW_LAT_PROD || (client) == IPA_CLIENT_MHI_LOW_LAT_CONS || (client) == IPA_CLIENT_MHI_DPL_CONS || (client) == IPA_CLIENT_MHI_QDSS_CONS)
 #define IPA_CLIENT_IS_TEST_PROD(client) ((client) == IPA_CLIENT_TEST_PROD || (client) == IPA_CLIENT_TEST1_PROD || (client) == IPA_CLIENT_TEST2_PROD || (client) == IPA_CLIENT_TEST3_PROD || (client) == IPA_CLIENT_TEST4_PROD)
 #define IPA_CLIENT_IS_TEST_CONS(client) ((client) == IPA_CLIENT_TEST_CONS || (client) == IPA_CLIENT_TEST1_CONS || (client) == IPA_CLIENT_TEST2_CONS || (client) == IPA_CLIENT_TEST3_CONS || (client) == IPA_CLIENT_TEST4_CONS)
 #define IPA_CLIENT_IS_TEST(client) (IPA_CLIENT_IS_TEST_PROD(client) || IPA_CLIENT_IS_TEST_CONS(client))
@@ -1033,6 +1038,7 @@ struct ipa_ioc_l2tp_vlan_mapping_info {
   enum ipa_l2tp_tunnel_type tunnel_type;
   uint16_t src_port;
   uint16_t dst_port;
+  uint16_t mtu;
 };
 struct ipa_ioc_gsb_info {
   char name[IPA_RESOURCE_NAME_MAX];
@@ -1050,6 +1056,11 @@ enum ipa_peripheral_ep_type {
   IPA_DATA_EP_TYP_EMBEDDED = 4,
   IPA_DATA_EP_TYP_BAM_DMUX,
 };
+enum ipa_data_ep_prot_type {
+  IPA_PROT_RMNET = 0,
+  IPA_PROT_RMNET_CV2X = 1,
+  IPA_PROT_MAX
+};
 struct ipa_ep_pair_info {
   uint32_t consumer_pipe_num;
   uint32_t producer_pipe_num;
@@ -1061,6 +1072,8 @@ struct ipa_ioc_get_ep_info {
   uint8_t num_ep_pairs;
   uint32_t ep_pair_size;
   uintptr_t info;
+  enum ipa_data_ep_prot_type teth_prot;
+  uint8_t teth_prot_valid;
 };
 struct ipa_ioc_wigig_fst_switch {
   uint8_t netdev_name[IPA_RESOURCE_NAME_MAX];
