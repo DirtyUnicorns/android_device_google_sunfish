@@ -162,7 +162,7 @@
 #define IPA_FLT_EXT_MTU (1ul << 2)
 #define IPA_FLT_EXT_L2TP_UDP_INNER_NEXT_HDR (1ul << 3)
 #define IPA_FLT_EXT_NEXT_HDR (1ul << 4)
-#define IPA_MAX_PDN_NUM 7
+#define IPA_MAX_PDN_NUM 5
 enum ipa_client_type {
   IPA_CLIENT_HSIC1_PROD = 0,
   IPA_CLIENT_HSIC1_CONS = 1,
