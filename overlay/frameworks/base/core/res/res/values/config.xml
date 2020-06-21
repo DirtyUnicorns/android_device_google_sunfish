@@ -50,7 +50,7 @@
 
     <!-- Enable Night display, which requires HWC 2.0. -->
     <bool name="config_nightDisplayAvailable">true</bool>
-  
+
     <!-- Default color temperature, in Kelvin, to tint the screen when night display is
          activated. -->
     <integer name="config_nightDisplayColorTemperatureDefault">3339</integer>
@@ -427,5 +427,8 @@
         <item>2.0</item>
         <item>450.0</item>
     </array>
+
+    <!-- Flag indicating whether we should enable the adaptive sleep.-->
+    <bool name="config_adaptive_sleep_available">true</bool>
 
 </resources>
