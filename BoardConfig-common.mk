@@ -256,4 +256,6 @@ BOARD_SUPER_PARTITION_ERROR_LIMIT := 9231663104
 # Testing related defines
 #BOARD_PERFSETUP_SCRIPT := platform_testing/scripts/perf-setup/s5-setup.sh
 
+BOARD_USES_CAF_LIBJSON := true
+
 -include vendor/google_devices/sunfish/proprietary/BoardConfigVendor.mk
