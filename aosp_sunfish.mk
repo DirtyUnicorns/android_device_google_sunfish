@@ -22,14 +22,14 @@ $(call inherit-product, device/google/sunfish/device-sunfish.mk)
 $(call inherit-product-if-exists, vendor/google_devices/sunfish/proprietary/device-vendor.mk)
 $(call inherit-product-if-exists, vendor/google_devices/sunfish/prebuilts/device-vendor-sunfish.mk)
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.ringtone=Ring_Synth_04.ogg \
-    ro.com.android.dataroaming=true \
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    ro.config.ringtone=Ring_Synth_04.ogg \
+#    ro.com.android.dataroaming=true \
 
 PRODUCT_PACKAGES += \
     PhotoTable \
     WallpaperPicker \
-    WAPPushManager \
+    WAPPushManager
 
 # Don't build super.img.
 PRODUCT_BUILD_SUPER_PARTITION := false
@@ -43,5 +43,5 @@ PRODUCT_NAME := aosp_sunfish
 PRODUCT_DEVICE := sunfish
 PRODUCT_MODEL := AOSP on sunfish
 
-PRODUCT_COPY_FILES += \
-    device/sample/etc/apns-full-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml
+#PRODUCT_COPY_FILES += \
+#    device/sample/etc/apns-full-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml
