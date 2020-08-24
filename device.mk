@@ -901,6 +901,7 @@ endif
 
 -include vendor/qcom/sm8150/proprietary/commonsys-intf/data/data_commonsys-intf_system_product.mk
 -include vendor/qcom/sm8150/proprietary/commonsys-intf/data/data_commonsys-intf_vendor_product.mk
+
 # Security
 -include vendor/qcom/sm8150/proprietary/securemsm/config/keymaster_vendor_proprietary_board.mk
 -include vendor/qcom/sm8150/proprietary/securemsm/config/keymaster_vendor_proprietary_product.mk
@@ -934,3 +935,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota_retrofit.mk)
 # Native video calling
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.dbg.vt_avail_ovr=1
+
+# RCS
+PRODUCT_PACKAGES += \
+    com.android.ims.rcsmanager \
+    PresencePolling \
+    RcsService
