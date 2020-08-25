@@ -1,0 +1,37 @@
+[
+ {
+   "repository":  "DirtyUnicorns/android_device_google_sunfish-sepolicy",
+   "target_path": "device/google/sunfish-sepolicy",
+   "branch":      "q10x"
+ },
+ {
+   "repository":  "DirtyUnicorns/android_external_json-c",
+   "target_path": "external/json-c",
+   "branch":      "q10x"
+ },
+ {
+   "repository":  "DirtyUnicorns/android_kernel_google_sunfish",
+   "target_path": "kernel/google/sunfish",
+   "branch":      "q10x"
+ },
+ {
+   "repository":  "DirtyUnicorns/android_vendor_google",
+   "target_path": "vendor/google",
+   "branch":      "q10x"
+ },
+ {
+   "repository":  "DirtyUnicorns/android_vendor_codeaurora_telephony",
+   "target_path": "vendor/codeaurora/telephony",
+   "branch":      "q10x"
+ },
+ {
+   "repository":  "DirtyUnicorns/android_vendor_qcom_opensource_interfaces",
+   "target_path": "vendor/qcom/opensource/interfaces",
+   "branch":      "q10x"
+ },
+ {
+   "repository":  "android_vendor_pixelgapps",
+   "target_path": "vendor/pixelgapps",
+   "branch":      "q10x"
+ }
+]
