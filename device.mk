@@ -381,6 +381,7 @@ PRODUCT_PACKAGES += \
 # Light HAL
 PRODUCT_PACKAGES += \
     lights.sm6150 \
+    hardware.google.light@1.0.vendor \
     hardware.google.light@1.1-service
 
 # Memtrack HAL
@@ -954,10 +955,8 @@ PRODUCT_PACKAGES += \
 # Build necessary packages for vendor
 PRODUCT_PACKAGES += \
     ese_spi_st \
-    libcamera2ndk_vendor \
     libcodec2_hidl@1.0.vendor:32 \
     libcodec2_vndk.vendor \
-    libdisplayconfig \
     libdrm.vendor \
     libjson \
     libmedia_ecoservice.vendor \
@@ -969,15 +968,13 @@ PRODUCT_PACKAGES += \
     libnos_datagram_citadel:64 \
     libnosprotos:64 \
     libnos_transport:64 \
-    libsensorndkbridge \
-    libtextclassifier_hash.vendor:64 \
+    libsensorndkbridge:64 \
     libtinycompress \
     libtinyxml \
     libwifi-hal-qcom \
     nos_app_avb:64 \
     nos_app_keymaster:64 \
     nos_app_weaver:64 \
-    sound_trigger.primary.sm6150 \
     vendor.display.config@1.0.vendor \
     vendor.display.config@1.1.vendor \
     vendor.display.config@1.2.vendor \
