@@ -59,7 +59,7 @@ BOARD_RAMDISK_OFFSET     := 0x02000000
 
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_KERNEL_SOURCE := kernel/google/flosun
+TARGET_KERNEL_SOURCE := kernel/google/sunfish
 TARGET_KERNEL_CONFIG := sunfish_defconfig
 BOARD_KERNEL_IMAGE_NAME := Image.lz4
 
