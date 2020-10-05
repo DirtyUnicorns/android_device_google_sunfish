@@ -946,6 +946,13 @@ PRODUCT_PACKAGES += \
     PresencePolling \
     RcsService
 
+# Build necessary packages for system
+PRODUCT_PACKAGES += \
+    libhidltransport \
+    libhwbinder \
+    libmediaplayerservice:32 \
+    libstagefright_httplive:32
+
 # Build necessary packages for vendor
 PRODUCT_PACKAGES += \
     android.hardware.sensors@2.0-ScopedWakelock.vendor:32 \
@@ -955,6 +962,7 @@ PRODUCT_PACKAGES += \
     libbatching \
     libcodec2_hidl@1.0.vendor:32 \
     libcodec2_vndk.vendor \
+    libcppbor.vendor:64 \
     libdrm.vendor \
     libgooglecamerahal.vendor:64 \
     libgooglecamerahalutils.vendor:64 \
@@ -976,6 +984,7 @@ PRODUCT_PACKAGES += \
     libpuresoftkeymasterdevice.vendor:64 \
     libsensorndkbridge:64 \
     libsoft_attestation_cert.vendor:64 \
+    libteeui_hal_support.vendor:64 \
     libtinycompress \
     libtinyxml \
     libwifi-hal:64 \
