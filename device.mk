@@ -1009,3 +1009,7 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.mapper@3.0.vendor \
     vendor.qti.hardware.display.mapperextensions@1.0.vendor \
     vendor.qti.hardware.display.mapperextensions@1.1.vendor
+
+# Shared java libs
+PRODUCT_PACKAGES += \
+    com.android.nfc_extras
